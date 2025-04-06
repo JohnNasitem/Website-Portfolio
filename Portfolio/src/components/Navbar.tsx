@@ -16,10 +16,14 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
     }
 
     return (
-        <nav className = "">
+        <nav className = "bg-gray-800 p-4">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Only add logo if one is supplied */}
-                {logo && <img src={logo} alt="Logo" className="h-8 w-8" />}
+                {logo && (
+                    <a href ="/" className="flex items-center">
+                        <img src={logo} alt="Logo" className="h-8 w-8" />
+                    </a>
+                )}
 
                 {/* Desktop Links */}
                 <div className="hidden md:flex space-x-6">
