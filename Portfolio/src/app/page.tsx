@@ -15,7 +15,7 @@ export default function Home() {
 
   return (
     <div>
-      <Navbar links={narbarLinks} logo="../../public/vercel.svg" />
+      <Navbar links={narbarLinks} logo="grad.png" />
       <HomeSection />
       <AboutSection />
       <ProjectsSection />
