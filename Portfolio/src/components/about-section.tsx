@@ -1,30 +1,9 @@
 "use client"
 
-import { useEffect, useState } from 'react';
+import useAnimateEntrance from './animate-entrance';
 
 const AboutSection = () => {
-    const [isVisible, setIsVisible] = useState(false);
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                // Check if the element is in the viewport
-                if (entry.isIntersecting) {
-
-                    setIsVisible(true);
-                    observer.disconnect(); // Stop observing once the element is visible
-                }
-            },
-            { threshold: 0 } // Trigger the animation when 50% of the element is in view
-        )
-
-        const target = document.getElementById('about');
-        if (target) {
-            observer.observe(target);
-        }
-    })
-
-    
+    const isVisible = useAnimateEntrance("about");
 
     return (
         <div id="about" className="grid grid-rows-[20px_1fr_20px] min-h-screen items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-red-500">
