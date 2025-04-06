@@ -16,7 +16,7 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
     }
 
     return (
-        <nav className = "bg-gray-800 p-4">
+        <nav className = "sticky top-0 bg-gray-800 p-4">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Only add logo if one is supplied */}
                 {logo && (
