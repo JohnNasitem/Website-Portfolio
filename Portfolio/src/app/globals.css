@@ -16,7 +16,25 @@
   --animate-slide-up: slideUp 1s ease-in-out;
   --animate-fade-slide-in: fadeIn 1s ease-in-out, slideUp 1s ease-in-out;
   --animate-fade-slide-out: fadeOut 1s ease-in-out forwards, slideDown 1s ease-in-out;
+  --animate-lift-up: liftUp 0.3s ease-in-out forwards;
+  --animate-lift-down: liftDown 0.3s ease-in-out forwards;
 
+  @keyframes liftUp {
+    0% {
+      transform: translateY(0px);
+    }
+    100% {
+      transform: translateY(-10px);
+    }
+  }
+  @keyframes liftDown {
+    0% {
+      transform: translateY(-10px);
+    }
+    100% {
+      transform: translateY(0px);
+    }
+  }
   @keyframes wiggle {
     0%,
     100% {
