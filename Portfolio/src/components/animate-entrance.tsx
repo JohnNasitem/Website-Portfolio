@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-const useAnimateEntrance = (elementId : string) => {
+const AnimateEntrance = (elementId : string) => {
     const [isVisible, setIsVisible] = useState(false);
 
     useEffect(() => {
@@ -26,4 +26,4 @@ const useAnimateEntrance = (elementId : string) => {
     return isVisible;
 }
 
-export default useAnimateEntrance;
+export default AnimateEntrance;
