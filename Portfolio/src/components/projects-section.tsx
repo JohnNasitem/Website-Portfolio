@@ -7,6 +7,7 @@ const ProjectsSection = () => {
     const section1Visible = useAnimateEntrance("projects_section1");
     const section2Visible = useAnimateEntrance("projects_section2");
     const section3Visible = useAnimateEntrance("projects_section3");
+    const section4Visible = useAnimateEntrance("projects_section4");
     
     return (
         <div id='projects' className="pageSection font-[family-name:var(--font-geist-mono)] bg-green-500">
@@ -16,12 +17,15 @@ const ProjectsSection = () => {
                 </h2>
                 <div className={`bg-blue-300 h-1 w-20 mt-5 mb-5 ${section1Visible ? 'animate-fade-slide-in' : ''}`}/>
 
-                <div className="flex flex-wrap">
-                    <div id='projects_section2' className={`${section2Visible ? 'animate-fade-slide-in' : ''} p-5`}>
+                <div className="flex flex-wrap gap-10">
+                    <div id='projects_section2' className={`${section2Visible ? 'animate-fade-slide-in' : ''}`}>
                         <InfoCard title="Spool Meter Management Sytem" description="Keep track of the remaining amount of material left in a spool and predict when it will run out." image="/grad.png"/>
                     </div>
-                    <div id='projects_section3' className={`${section3Visible ? 'animate-fade-slide-in' : ''} p-5`}>
+                    <div id='projects_section3' className={`${section3Visible ? 'animate-fade-slide-in' : ''}`}>
                         <InfoCard title="Cronocord" description="Discord bot helps manage schedules betweeen multiple people." image="/grad.png"/>
+                    </div>
+                    <div id='projects_section4' className={`${section4Visible ? 'animate-fade-slide-in' : ''}`}>
+                        <InfoCard title="Website Porfolio" description="The site you are looking at right now." image="/grad.png"/>
                     </div>
                 </div>
             </div>
