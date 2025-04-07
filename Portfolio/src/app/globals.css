@@ -76,3 +76,9 @@ body {
 html {
   scroll-behavior: smooth;
 }
+
+/*Scroll down to accomodate for the nav bar*/
+.pageSection  {
+  scroll-margin-top: 60px;
+  min-height: calc(100vh - 60px);
+}
