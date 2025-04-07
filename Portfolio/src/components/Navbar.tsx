@@ -16,7 +16,7 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
     }
 
     return (
-        <nav className="sticky top-0 bg-gray-800 p-4 z-1000">
+        <nav className="sticky top-0 bg-[var(--color-bg-alt-accent)] p-4 z-1000">
             <div className="container mx-auto flex justify-between items-center">
                 {/* Only add logo if one is supplied */}
                 {logo && (
@@ -28,20 +28,20 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
                 {/* Desktop Links */}
                 <div className="hidden md:flex space-x-6">
                     {links.map((link, index) => (
-                        <Link key={index} href={link.href} className="text-white hover:text-gray-400">{link.name}</Link>
+                        <Link key={index} href={link.href} className="text-[var(--color-foreground)] hover:text-[var(--color-background)]">{link.name}</Link>
                     ))}
                 </div>
 
                 {/* Hamburger Icon for mobile */}
-                <button onClick={toggleMenu} className="md:hidden text-white">
+                <button onClick={toggleMenu} className="md:hidden text-[var(--color-foreground)]">
                     ☰
                 </button>
 
                 {/* Mobile Menu */}
                 {isMenuOpen && (
-                    <div className="md:hidden bg-gray-700 p-4">
+                    <div className="md:hidden bg-[var(--color-bg-alt-accent)] p-4">
                         {links.map((link, index) => (
-                            <Link key={index} href={link.href} className="block text-white py-2 hover:bg-gray-600">{link.name}</Link>
+                            <Link key={index} href={link.href} className="block text-[var(--color-foreground)] py-2 hover:text-[var(--color-background)]">{link.name}</Link>
                         ))}
                     </div>
                 )}

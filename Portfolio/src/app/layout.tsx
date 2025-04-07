@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "John Nasitem's Portfolio",
   description: "Showcasing my work as a Computer Engineering Technologist",
   icons: {
-    icon: "/grad.ico", // this is the key line
+    icon: "/grad.ico",
   },
 };
 

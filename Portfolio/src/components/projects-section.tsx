@@ -10,7 +10,7 @@ const ProjectsSection = () => {
     const section4Visible = useAnimateEntrance("projects_section4");
     
     return (
-        <div id='projects' className="pageSection font-[family-name:var(--font-geist-mono)] bg-green-500">
+        <div id='projects' className="pageSection font-[family-name:var(--font-geist-mono)]">
             <div className="p-8 sm:p-10">
                 <h2 id='projects_section1' className={`text-2xl sm:text-6xl font-bold justify-self-left ${section1Visible ? 'animate-fade-slide-in' : ''}`}>
                     Projects
