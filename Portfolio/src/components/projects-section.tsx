@@ -3,18 +3,16 @@
 import useAnimateEntrance from './animate-entrance';
 
 const ProjectsSection = () => {
-    const isVisible = useAnimateEntrance("projects");
+    const section1Visible = useAnimateEntrance("projects_section1");
     
     return (
-        <div id="projects" className="grid grid-rows-[20px_1fr_20px] min-h-screen items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-green-500">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-            <div className={`list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)] ${isVisible ? 'animate-fade-slide-in' : ''}`}>
-                <h1 className="text-4xl sm:text-6xl font-bold justify-self-center">
-                Projects
-                </h1>
-            </div>
-        </main>
-        </div> 
+        <div id='projects' className="pageSection font-[family-name:var(--font-geist-mono)] bg-green-500">
+            <div className="grid grid-rows-[1fr_1fr_1fr] p-8 sm:p-10">
+                <div id='projects_section1' className={`${section1Visible ? 'animate-fade-slide-in' : ''}`}>
+                    Temp
+                </div>
+            </div> 
+        </div>
     )
 };
     

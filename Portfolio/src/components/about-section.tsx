@@ -3,18 +3,22 @@
 import useAnimateEntrance from './animate-entrance';
 
 const AboutSection = () => {
-    const isVisible = useAnimateEntrance("about");
+    const section1Visible = useAnimateEntrance("about_section1");
 
     return (
-        <div id="about" className="grid grid-rows-[20px_1fr_20px] min-h-screen items-center justify-items-center p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] bg-red-500">
-        <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-            <div className={`list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)] ${isVisible ? 'animate-fade-slide-in' : ''}`}>
-                <h1 className="text-4xl sm:text-6xl font-bold justify-self-center">
-                About
-                </h1>
-            </div>
-        </main>
-        </div> 
+        <div id='about' className="pageSection font-[family-name:var(--font-geist-mono)] bg-red-500">
+            <div className="grid grid-rows-[1fr_1fr_1fr] p-8 sm:p-10">
+                <div id='about_section1' className={`${section1Visible ? 'animate-fade-slide-in' : ''}`}>
+                    <h2 className="text-2xl sm:text-6xl font-bold justify-self-left">
+                        About
+                    </h2>
+                    <div className='bg-blue-300 h-1 w-20 mt-5 mb-5'/>
+                    <p className="text-2x1 text-left sm:text-left">
+                        I am a Computer Engineering Techonlogist.
+                    </p>
+                </div>
+            </div> 
+        </div>
     )
 };
     
