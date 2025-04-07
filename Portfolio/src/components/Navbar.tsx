@@ -9,10 +9,10 @@ type NarbarProps = {
 }
 
 const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
-    const [isMenuOpen, setIsMenyOpen] = useState(false);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const toggleMenu = () => {
-        setIsMenyOpen(!isMenuOpen);
+        setIsMenuOpen(!isMenuOpen);
     }
 
     return (
