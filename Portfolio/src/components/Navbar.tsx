@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import ThemeToggle from "@/components/theme-toggle";
 
 type NarbarProps = {
     links: { name: string; href: string }[];    // Array of objects with name and href properties
@@ -30,6 +31,7 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
                     {links.map((link, index) => (
                         <Link key={index} href={link.href} className="text-[var(--color-foreground)] hover:text-[var(--color-background)]">{link.name}</Link>
                     ))}
+                    <ThemeToggle/>
                 </div>
 
                 {/* Hamburger Icon for mobile */}
