@@ -14,7 +14,7 @@ const SkillField = ({name , strenghtLevel }: {name: string, strenghtLevel: SKill
     return (
         <div className='m-3 sm:m-6'>
             <div className='grid grid-cols-2 grid-rows-1 font-bold'>
-                <span className='text-left'>{name}:</span>
+                <span className='text-left'>{name}</span>
                 <span className='text-right'>{SKillLevel[strenghtLevel]}</span>
             </div>
             <TailwindProgressBar percent={strenghtLevel}/>
