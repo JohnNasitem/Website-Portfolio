@@ -7,8 +7,8 @@ import Image from 'next/image';
 
 const SVGRenderer = ({icon}: {icon: string}) => {
     const nameToIcon: Record<string, JSX.Element> = {
-        Github: <Moon />,
-        LinkedIn: <Sun />,
+        light: <Moon />,
+        dark: <Sun />,
     }
 
     return nameToIcon[icon] || <div>Icon not added to SVGRenderer</div>
@@ -39,7 +39,7 @@ const ThemeToggle = () => {
       
     return (
         <button onClick={toggleTheme} className='hover:animate-grow animate-shrink'>
-            <SVGRenderer icon={`${(theme === 'light' ? 'moon' : 'sun')}`} />
+            <SVGRenderer icon={theme} />
         </button>
     )
 }
