@@ -1,7 +1,8 @@
 const ProgressBar = ({ percent }: {percent: number}) => (
-    <div className="w-full h-4 bg-gray-200 rounded-full overflow-hidden">
+    <div className="w-full h-4 bg-[var(--color-bg-alt-accent)] rounded-full overflow-hidden">
       <div
-        className="h-full bg-gradient-to-r from-green-800 to-green-500"
+        // className="h-full bg-gradient-to-r from-[var(--color-bg-alt-accent)] to-[var(--color-bg-alt-accent)]"
+        className="h-full bg-[var(--color-foreground)]"
         style={{ width: `${percent}%` }}
       ></div>
     </div>
