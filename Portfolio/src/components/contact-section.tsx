@@ -19,7 +19,7 @@ const SVGRenderer = ({icon}: {icon: string}) => {
 
 const LinkField = ({name, description, link, color}: {name: string, description?: string, link: string, color: string}) => {
     return (
-        <div className="rounded-lg p-4 w-full" style={{ backgroundColor: color}}>
+        <div className="rounded-lg p-4 w-full  hover:animate-grow animate-shrink" style={{ backgroundColor: color}}>
             <Link href={link} target='_black' className='grid grid-cols-[auto_auto_1fr] gap-2 text-white'>
                 <SVGRenderer icon={name}/>
                 <div>{name}</div>
