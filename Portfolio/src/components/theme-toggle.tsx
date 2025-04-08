@@ -1,7 +1,18 @@
 "use client"
 
 import React, { useState, useEffect } from 'react';
+import { JSX } from 'react';
+import { Moon, Sun } from 'lucide-react';
 import Image from 'next/image';
+
+const SVGRenderer = ({icon}: {icon: string}) => {
+    const nameToIcon: Record<string, JSX.Element> = {
+        Github: <Moon />,
+        LinkedIn: <Sun />,
+    }
+
+    return nameToIcon[icon] || <div>Icon not added to SVGRenderer</div>
+}
 
 const ThemeToggle = () => {
     const [theme, setTheme] = useState<'light' | 'dark'>('light');
@@ -28,7 +39,7 @@ const ThemeToggle = () => {
       
     return (
         <button onClick={toggleTheme} className='hover:animate-grow animate-shrink'>
-            <Image src={`/${(theme === 'light' ? 'moon' : 'sun')}.png`} width={24} height={24} alt={`${(theme === 'light' ? 'moon' : 'sun')}`}/>
+            <SVGRenderer icon={`${(theme === 'light' ? 'moon' : 'sun')}`} />
         </button>
     )
 }
