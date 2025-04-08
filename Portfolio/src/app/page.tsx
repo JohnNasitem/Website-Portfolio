@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <div className="text-[var(--color-foreground)] bg-[var(--color-background)]">
       <ToTop />
-      <Navbar links={narbarLinks} logo="grad.png" />
+      <Navbar links={narbarLinks} logo="JN.svg" />
       <HomeSection />
       <AboutSection />
       <SkillsSection />
