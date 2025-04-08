@@ -33,19 +33,31 @@ const SkillsSection = () => {
                     Skills
                 </h2>
                 <div className={`bg-blue-300 h-1 w-20 mt-5 mb-5 ${section1Visible ? 'animate-fade-slide-in' : ''}`}/>
-                <div id='skills_section2' className={`text-2x1 w-fill sm:grid sm:grid-cols-2 ${section2Visible ? 'animate-fade-slide-in' : ''}`}>
-                    <SkillField name="C#" strenghtLevel={SKillLevel.Advanced}/>
-                    <SkillField name="ASP.NET CORE" strenghtLevel={SKillLevel.Advanced}/>
-                    <SkillField name=".NET" strenghtLevel={SKillLevel.Advanced}/>
-                    <SkillField name="MYSQL" strenghtLevel={SKillLevel.Intermediate}/>
-                    <SkillField name="PHP" strenghtLevel={SKillLevel.Intermediate}/>
-                    <SkillField name="PYTHON" strenghtLevel={SKillLevel.Intermediate}/>
-                    <SkillField name="HTML" strenghtLevel={SKillLevel.Intermediate}/>
-                    <SkillField name="CSS" strenghtLevel={SKillLevel.Intermediate}/>
-                    <SkillField name="Javascript" strenghtLevel={SKillLevel.Intermediate}/>
-                    <SkillField name="React" strenghtLevel={SKillLevel.Beginner}/>
-                    <SkillField name="Tailwind" strenghtLevel={SKillLevel.Beginner}/>
-                    <SkillField name="Typescript" strenghtLevel={SKillLevel.Beginner}/>
+                <div id='skills_section2' className={`text-2x1 w-fill sm:grid sm:grid-cols-3 ${section2Visible ? 'animate-fade-slide-in' : ''}`}>
+                    <div>
+                        <h3 className='text-center font-bold text-2xl'>Languages</h3>
+                        <SkillField name="C#" strenghtLevel={SKillLevel.Advanced}/>
+                        <SkillField name="SQL" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="PHP" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="PYTHON" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="HTML" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="CSS" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="Javascript" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="Typescript" strenghtLevel={SKillLevel.Beginner}/>
+                    </div>
+                    <div>
+                        <h3 className='text-center font-bold text-2xl'>Frameworks</h3>
+                        <SkillField name="ASP.NET CORE" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name=".NET MAUI" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="JQUERY" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="Tailwind" strenghtLevel={SKillLevel.Beginner}/>
+                    </div>
+                    <div>
+                        <h3 className='text-center font-bold text-2xl'>Other</h3>
+                        <SkillField name="REST" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="WEBSOCKETS" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="React" strenghtLevel={SKillLevel.Beginner}/>
+                    </div>
                 </div>
             </div>
         </div>
