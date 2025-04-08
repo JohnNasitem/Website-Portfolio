@@ -45,7 +45,7 @@ const ContactSection = () => {
                 <div className='grid sm:grid-cols-2 gap-y-5 gap-x-20'>
                     <div id='contact_section2' className={`${section2Visible ? 'animate-fade-slide-in' : ''} flex justify-center items-center w-full`}>
                         <div className='rounded-lg bg-[var(--color-bg-accent)] p-4 sm:p-8 w-full h-full'>
-                            <div className='text-center text-2x1 sm:text-3xl pb-5'>Contact Info</div>
+                            <div className='text-center text-2x1 sm:text-3xl pb-5'>Links</div>
                             <div className='grid gap-4 sm:w-[50%] mx-auto'>
                                 <LinkField name='Github' link='https://github.com/JohnNasitem' color='#181717'/>
                                 <LinkField name='LinkedIn' link='www.linkedin.com/in/john-nasitem-6b940a23a' color='#0077B5'/>
