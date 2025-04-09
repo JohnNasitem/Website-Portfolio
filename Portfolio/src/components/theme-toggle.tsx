@@ -3,7 +3,6 @@
 import React, { useState, useEffect } from 'react';
 import { JSX } from 'react';
 import { Moon, Sun } from 'lucide-react';
-import Image from 'next/image';
 
 const SVGRenderer = ({icon}: {icon: string}) => {
     const nameToIcon: Record<string, JSX.Element> = {
