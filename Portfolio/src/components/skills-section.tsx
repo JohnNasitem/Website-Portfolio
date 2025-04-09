@@ -46,10 +46,11 @@ const SkillsSection = () => {
                         <SkillField name="Typescript" strenghtLevel={SKillLevel.Beginner}/>
                     </div>
                     <div>
-                        <h3 className='text-center font-bold text-2xl'>Frameworks</h3>
+                        <h3 className='text-center font-bold text-2xl'>Frameworks & Libraries</h3>
                         <SkillField name="ASP.NET CORE" strenghtLevel={SKillLevel.Intermediate}/>
                         <SkillField name=".NET MAUI" strenghtLevel={SKillLevel.Intermediate}/>
                         <SkillField name="JQUERY" strenghtLevel={SKillLevel.Intermediate}/>
+                        <SkillField name="REACT" strenghtLevel={SKillLevel.Beginner}/>
                         <SkillField name="TAILWIND" strenghtLevel={SKillLevel.Beginner}/>
                         <SkillField name="NEXT.JS" strenghtLevel={SKillLevel.Beginner}/>
                     </div>
@@ -57,7 +58,7 @@ const SkillsSection = () => {
                         <h3 className='text-center font-bold text-2xl'>Other</h3>
                         <SkillField name="REST" strenghtLevel={SKillLevel.Intermediate}/>
                         <SkillField name="WEBSOCKETS" strenghtLevel={SKillLevel.Intermediate}/>
-                        <SkillField name="REACT" strenghtLevel={SKillLevel.Beginner}/>
+                        <SkillField name="JSON" strenghtLevel={SKillLevel.Intermediate}/>
                     </div>
                 </div>
             </div>
