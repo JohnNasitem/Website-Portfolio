@@ -19,7 +19,7 @@ const ProjectsSection = () => {
 
                 <div className="flex flex-wrap gap-10">
                     <div id='projects_section2' className={`${section2Visible ? 'animate-fade-slide-in' : ''}`}>
-                        <InfoCard link='/projects' title="Spool Meter Management Sytem" description="Keep track of the remaining amount of material left in a spool and predict when it will run out." image="/smms.png"/>
+                        <InfoCard link='/projects#Spool_Meter_Management_Sytem' title="Spool Meter Management Sytem" description="Keep track of the remaining amount of material left in a spool and predict when it will run out." image="/smms.png"/>
                     </div>
                     <div id='projects_section3' className={`${section3Visible ? 'animate-fade-slide-in' : ''}`}>
                         <InfoCard link='/projects' title="Cronocord" description="Discord bot helps manage schedules betweeen multiple people." image="/discord_bot.png"/>
