@@ -50,13 +50,14 @@ const SkillsSection = () => {
                         <SkillField name="ASP.NET CORE" strenghtLevel={SKillLevel.Intermediate}/>
                         <SkillField name=".NET MAUI" strenghtLevel={SKillLevel.Intermediate}/>
                         <SkillField name="JQUERY" strenghtLevel={SKillLevel.Intermediate}/>
-                        <SkillField name="Tailwind" strenghtLevel={SKillLevel.Beginner}/>
+                        <SkillField name="TAILWIND" strenghtLevel={SKillLevel.Beginner}/>
+                        <SkillField name="NEXT.JS" strenghtLevel={SKillLevel.Beginner}/>
                     </div>
                     <div>
                         <h3 className='text-center font-bold text-2xl'>Other</h3>
                         <SkillField name="REST" strenghtLevel={SKillLevel.Intermediate}/>
                         <SkillField name="WEBSOCKETS" strenghtLevel={SKillLevel.Intermediate}/>
-                        <SkillField name="React" strenghtLevel={SKillLevel.Beginner}/>
+                        <SkillField name="REACT" strenghtLevel={SKillLevel.Beginner}/>
                     </div>
                 </div>
             </div>
