@@ -33,7 +33,7 @@ const SkillsSection = () => {
                     Skills
                 </h2>
                 <div className={`bg-blue-300 h-1 w-20 mt-5 mb-5 ${section1Visible ? 'animate-fade-slide-in' : ''}`}/>
-                <div id='skills_section2' className={`text-2x1 w-fill sm:grid sm:grid-cols-3 ${section2Visible ? 'animate-fade-slide-in' : ''}`}>
+                <div id='skills_section2' className={`text-2x1 w-fill sm:grid sm:grid-cols-2 ${section2Visible ? 'animate-fade-slide-in' : ''}`}>
                     <div>
                         <h3 className='text-center font-bold text-2xl'>Languages</h3>
                         <SkillField name="C#" strenghtLevel={SKillLevel.Advanced}/>
@@ -53,12 +53,6 @@ const SkillsSection = () => {
                         <SkillField name="REACT" strenghtLevel={SKillLevel.Beginner}/>
                         <SkillField name="TAILWIND" strenghtLevel={SKillLevel.Beginner}/>
                         <SkillField name="NEXT.JS" strenghtLevel={SKillLevel.Beginner}/>
-                    </div>
-                    <div>
-                        <h3 className='text-center font-bold text-2xl'>Other</h3>
-                        <SkillField name="REST" strenghtLevel={SKillLevel.Intermediate}/>
-                        <SkillField name="WEBSOCKETS" strenghtLevel={SKillLevel.Intermediate}/>
-                        <SkillField name="JSON" strenghtLevel={SKillLevel.Intermediate}/>
                     </div>
                 </div>
             </div>
