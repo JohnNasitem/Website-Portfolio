@@ -14,21 +14,11 @@ type Skill = {
     category: SkillCatgegory;
 }
 
-const SkillTag: React.FC<SkillFilterTag> = ({skill, selected, isFilter}) => {
-    const [isSelected, setSelected] = useState(selected);
-
-    const toggleSelect = () => {
-        if (isFilter) {
-            console.log(`Filter by ${skill.name}`);
-            setSelected(!isSelected);
-        }
-    }
-
-    return (
-        <div onClick={toggleSelect} style={{ backgroundColor: isSelected ? skill.category : 'var(--color-bg-alt-accent)' }} className={`${isFilter ? 'hover:animate-grow animate-shrink hover:cursor-default' : ''} inline-block px-2 py-1 rounded-full text-sm w-fit`}>
-            {skill.name}
-        </div>
-    )
+type SkillFilterTag = {
+    skill: Skill;
+    selected: boolean;
+    isFilter: boolean;
+    setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>;
 }
 
 const skillsDictionary: Record<string, Skill> = {
@@ -48,12 +38,6 @@ const skillsDictionary: Record<string, Skill> = {
     'jQuery': { name: 'jQuery', category: SkillCatgegory.Library },
 };
 
-type SkillFilterTag = {
-    skill: Skill;
-    selected: boolean;
-    isFilter: boolean;
-}
-
 const filteredSkills = Object.values(skillsDictionary).map((skill) => {
     return {
         skill: skill,
@@ -68,7 +52,7 @@ type ProjectInfoProps = {
     githubLink?: string;
 }
 
-const SearchAndFilterBar: React.FC = () => {
+const SearchAndFilterBar: React.FC<{setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>}> = ({ setDisplayedProjects }) => {
     return (
         <div className="text-center w-full p-4 space-y-3">
             <div className="space-x-5">
@@ -77,7 +61,7 @@ const SearchAndFilterBar: React.FC = () => {
             </div>
             <div className="space-x-2">
                 {filteredSkills.map((skillTag, index) => (
-                    <SkillTag key={index} skill={skillTag.skill} selected={skillTag.selected} isFilter={true}/>
+                    <SkillTag key={index} skill={skillTag.skill} selected={skillTag.selected} isFilter={true} setDisplayedProjects={setDisplayedProjects}/>
                 ))}
             </div>
         </div>
@@ -103,7 +87,7 @@ const ProjectInfo: React.FC<ProjectInfoProps> = ({ name, description, skillsUsed
     );
 }
 
-const projects = [
+const projects: React.ReactElement<typeof ProjectInfo>[] = [
     <ProjectInfo 
         name='Spool Meter Management System' 
         description=
@@ -119,18 +103,75 @@ const projects = [
             skillsDictionary['C#'],
             skillsDictionary['ASP.NET CORE'],
             skillsDictionary['.NET MAUI'],
-            skillsDictionary['SQL'],
+            skillsDictionary['SQL']
         ]}
     />
 ]
 
-const displayedProjects = projects
+const SkillTag: React.FC<SkillFilterTag> = ({skill, selected, isFilter, setDisplayedProjects}) => {
+    const [isSelected, setSelected] = useState(selected);
+
+    const toggleSelect = () => {
+        if (isFilter) {
+            console.log(`Filter by ${skill.name}`);
+            setSelected(!isSelected);
+
+            var toggledSkillIndex = filteredSkills.findIndex((skillTag) => {
+                return skillTag.skill.name == skill.name
+            })
+
+            if (toggledSkillIndex !== -1)
+                filteredSkills[toggledSkillIndex].selected = !isSelected
+
+            // Update displayed projects
+            var projectsToDisplay: React.ReactElement<typeof ProjectInfo>[]  = []
+            var selectedSkills: string[] = []
+            
+            // 
+            Object.entries(filteredSkills).forEach(([key, value]: [string, { skill: Skill, selected: boolean}]) => {
+                if (value.selected)
+                    selectedSkills.push(value.skill.name)
+            });
+            
+            projects.forEach((curProject: React.ReactElement<typeof ProjectInfo>) => {
+                 // Access props of the component
+                const props = curProject.props as typeof ProjectInfo;
+                console.log(props)
+                var tempSkills = structuredClone(selectedSkills)
+                
+                // Remove any skills that are met
+                props.skillsUsed.forEach((skill: Skill) => {
+                    var skillIndex = tempSkills.indexOf(skill.name);
+                    if (skillIndex !== -1) {
+                        tempSkills.splice(skillIndex, 1);
+                    }
+                })
+                
+                // Display project if it has all the skills selected
+                if (tempSkills.length == 0) {
+                    projectsToDisplay.push(curProject)
+                }
+            })
+
+            setDisplayedProjects(projectsToDisplay)
+        }
+    }
+
+    return (
+        <div onClick={toggleSelect} style={{ backgroundColor: isSelected ? skill.category : 'var(--color-bg-alt-accent)' }} className={`${isFilter ? 'hover:animate-grow animate-shrink hover:cursor-default' : ''} inline-block px-2 py-1 rounded-full text-sm w-fit`}>
+            {skill.name}
+        </div>
+    )
+}   
+
 
 export default function Home() {
+    const [displayedProjects, setProjects] = useState(projects);
+
     return (
        <div className="p-4">
             <div className="w-full text-center text-4xl font-bold">Projects</div>
-            <SearchAndFilterBar/>
+            <SearchAndFilterBar setDisplayedProjects={setProjects}/>
             {displayedProjects.map((project, index) => (
                 <div key={index}>
                     {project}
