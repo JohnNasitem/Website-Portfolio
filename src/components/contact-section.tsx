@@ -48,7 +48,7 @@ const ContactSection = () => {
                             <div className='text-center text-2x1 sm:text-3xl pb-5'>Links</div>
                             <div className='grid gap-4 sm:w-[50%] mx-auto'>
                                 <LinkField name='Github' link='https://github.com/JohnNasitem' color='#181717'/>
-                                <LinkField name='LinkedIn' link='www.linkedin.com/in/john-nasitem-6b940a23a' color='#0077B5'/>
+                                <LinkField name='LinkedIn' link='https://www.linkedin.com/in/john-nasitem-6b940a23a' color='#0077B5'/>
                                 <LinkField name='Mail' description='jc.nasitem@gmail.com' link='mailto:jc.nasitem@gmail.com' color='#DB4437'/>
                             </div>
                         </div>
