@@ -23,7 +23,7 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
                 {/* Only add logo if one is supplied */}
                 {logo && (
                     <Link href ="/" className="flex items-center">
-                        <Image width={100} height={100} src={logo} alt="Logo" className="h-8" />
+                        <Image width={100} height={100} src={logo} alt="Logo" className="h-8 w-auto" />
                     </Link>
                 )}
 

@@ -29,7 +29,7 @@ const ToTop = () => {
         return () => {
             window.removeEventListener('scroll', handleScroll);
         };
-    }, [window]);
+    }, []);
 
     return (
         <button onClick={scrollToTop} className={`z-999 text-[var(--color-foreground)] bg-[var(--color-bg-alt-accent)] flex items-center h-10 w-10 rounded-lg fixed bottom-5 right-5 p-4 ${scrolled ? (isNotDefaultPos ? 'animate-fade-slide-out' : 'animate-fade-slide-in') : 'hidden'}`}>

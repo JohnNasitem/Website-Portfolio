@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
-import { useSearchParams } from 'next/navigation'
+import QueryReader from "@/components/query-reader";
+import { Suspense } from "react";
 
 let searchFilter = '';
 
@@ -33,22 +34,19 @@ type ProjectInfoProps = {
 
 const FilterProjects = (setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>) => {
     // Update displayed projects
-    let projectsToDisplay: React.ReactElement<typeof ProjectInfo>[]  = []
-    let selectedSkills: string[] = []
+    const projectsToDisplay: React.ReactElement<typeof ProjectInfo>[]  = []
+    const selectedSkills: string[] = []
     
     // 
-    Object.entries(filteredSkills).forEach(([key, value]: [string, { skill: Skill, selected: boolean}]) => {
+    Object.entries(filteredSkills).forEach(([, value]: [string, { skill: Skill, selected: boolean}]) => {
         if (value.selected)
             selectedSkills.push(value.skill.name)
     });
-    
-    projects.forEach((curProject: React.ReactElement<typeof ProjectInfo>) => {
-         // Access props of the component
-        const props = curProject.props as typeof ProjectInfo;
-        console.log(props)
-        let tempSkills = structuredClone(selectedSkills)
 
-        console.log('Search filter: ' + searchFilter + ' Project name: ' + props.name.toLowerCase())
+    projects.forEach((curProject: React.ReactElement<typeof ProjectInfo>) => {
+        // Access props of the component
+        const props = curProject.props as unknown as ProjectInfoProps;
+        const tempSkills = structuredClone(selectedSkills)
 
         // Skip project if the name doesnt match the search filter
         if (searchFilter !== '' && props.name.toLowerCase().startsWith(searchFilter) == false)
@@ -56,7 +54,7 @@ const FilterProjects = (setDisplayedProjects: React.Dispatch<React.SetStateActio
         
         // Remove any skills that are met
         props.skillsUsed.forEach((skill: Skill) => {
-            let skillIndex = tempSkills.indexOf(skill.name);
+            const skillIndex = tempSkills.indexOf(skill.name);
             if (skillIndex !== -1) {
                 tempSkills.splice(skillIndex, 1);
             }
@@ -121,10 +119,9 @@ const SkillTag: React.FC<SkillFilterTag> = ({skill, selected, isFilter, setDispl
 
     const toggleSelect = () => {
         if (isFilter) {
-            console.log(`Filter by ${skill.name}`);
             setSelected(!isSelected);
 
-            let toggledSkillIndex = filteredSkills.findIndex((skillTag) => {
+            const toggledSkillIndex = filteredSkills.findIndex((skillTag) => {
                 return skillTag.skill.name == skill.name
             })
 
@@ -168,7 +165,8 @@ const filteredSkills = Object.values(skillsDictionary).map((skill) => {
 }).sort((a, b) => b.skill.category.toString().localeCompare(a.skill.category.toString()));
 
 const projects: React.ReactElement<typeof ProjectInfo>[] = [
-    <ProjectInfo 
+    <ProjectInfo
+        key={0}
         name='Spool Meter Management System' 
         description=
             {`The Spool Meter Management System was my technical project for my final term at NAIT.
@@ -187,6 +185,7 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
         ]}
     />,
     <ProjectInfo 
+        key={1}
         name='Cronocord'
         description=
             {`Cronocord is a Discord bot that helps manage schedules between multiple people.
@@ -200,6 +199,7 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
         githubLink="https://github.com/JohnNasitem/Hacked2025-HomelessInc"
     />,
     <ProjectInfo 
+        key={2}
         name='Website Portfolio'
         description=
             {`This is the website you are looking at right now.
@@ -221,27 +221,25 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
 
 export default function Home() {
     const [displayedProjects, setProjects] = useState(projects);
+
     const searchBarRef = useRef<HTMLDivElement>(null);
 
-    const searchParams = useSearchParams()
-    const query = searchParams.get('filter')
-
     useEffect(() => {
-        console.log(query)  
-        searchFilter = query ? query.toLowerCase() : '';
-        console.log(searchBarRef.current)
-
         FilterProjects(setProjects)
         if (searchBarRef.current) {
-            let input = searchBarRef.current?.querySelector('input');
+            const input = searchBarRef.current?.querySelector('input');
             if (input) {
                 input.value = searchFilter;
             }
         }
-    }, [query]);
+    }, []);
+
 
     return (
        <div className="p-4">
+            <Suspense>
+                <QueryReader onQuery={(query) => {searchFilter = query ? query.toLocaleLowerCase() : ''}} />
+            </Suspense>
             <div className="w-full text-center text-4xl font-bold">Projects</div>
             <SearchAndFilterBar setDisplayedProjects={setProjects} searchBarRef={searchBarRef}/>
             <div className="grid gap-y-5">
