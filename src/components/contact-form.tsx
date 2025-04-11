@@ -11,8 +11,16 @@ const ContactForm = () => {
         event.preventDefault();
 
         if (!formRef.current) return;
+        const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
+        const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
+        const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
+
+        if (!(serviceId && templateId && publicKey)){
+            alert('Failed to send message.');
+            return
+        }
         
-        emailjs.sendForm("service_4r3llr3", "template_i6u32t9", formRef.current, "pTRT281PVp4M4S4Qv")
+        emailjs.sendForm(serviceId, templateId, formRef.current, publicKey)
         .then(() => {
             alert('Message sent!');
             formRef.current?.reset();
