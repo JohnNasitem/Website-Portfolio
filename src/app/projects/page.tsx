@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useRef, useEffect, useState } from "react";
+import { useSearchParams } from 'next/navigation'
 
 var searchFilter = '';
 
@@ -71,9 +72,7 @@ const FilterProjects = (setDisplayedProjects: React.Dispatch<React.SetStateActio
         setDisplayedProjects(projectsToDisplay)
 }
 
-const SearchAndFilterBar: React.FC<{setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>}> = ({ setDisplayedProjects }) => {
-    const searchBarRef = useRef<HTMLDivElement>(null);
-
+const SearchAndFilterBar: React.FC<{setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>, searchBarRef: React.RefObject<HTMLDivElement | null> }> = ({ setDisplayedProjects, searchBarRef }) => {
     const Search = (e: React.ChangeEvent<HTMLInputElement>) => {
         if (searchBarRef.current) {
             searchFilter = e.target.value.toLowerCase();
@@ -222,11 +221,29 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
 
 export default function Home() {
     const [displayedProjects, setProjects] = useState(projects);
+    const searchBarRef = useRef<HTMLDivElement>(null);
+
+    const searchParams = useSearchParams()
+    const query = searchParams.get('filter')
+
+    useEffect(() => {
+        console.log(query)  
+        searchFilter = query ? query.toLowerCase() : '';
+        console.log(searchBarRef.current)
+
+        FilterProjects(setProjects)
+        if (searchBarRef.current) {
+            var input = searchBarRef.current?.querySelector('input');
+            if (input) {
+                input.value = searchFilter;
+            }
+        }
+    }, [query]);
 
     return (
        <div className="p-4">
             <div className="w-full text-center text-4xl font-bold">Projects</div>
-            <SearchAndFilterBar setDisplayedProjects={setProjects}/>
+            <SearchAndFilterBar setDisplayedProjects={setProjects} searchBarRef={searchBarRef}/>
             <div className="grid gap-y-5">
                 {projects.map((project, index) => (
                     <div 
