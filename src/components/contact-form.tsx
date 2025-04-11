@@ -11,6 +11,13 @@ const ContactForm = () => {
         event.preventDefault();
 
         if (!formRef.current) return;
+
+        // Check if all fields are filled
+        if (!formRef.current.name.value || !formRef.current.email.value || !formRef.current.subject.value || !formRef.current.message.value) {
+            alert('All fields are required!');
+            return;
+        }
+
         const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID
         const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID
         const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY
