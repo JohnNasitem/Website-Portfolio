@@ -216,7 +216,7 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
             skillsDictionary['Next.js'],
             skillsDictionary['React']
         ]}
-        githubLink="https://github.com/JohnNasitem/Hacked2025-HomelessInc"
+        githubLink="https://github.com/JohnNasitem/Website-Portfolio"
     />
 ]
 
