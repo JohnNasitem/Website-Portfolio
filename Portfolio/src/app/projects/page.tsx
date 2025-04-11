@@ -1,7 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
+
+var searchFilter = '';
 
 enum SkillCatgegory {
     Language = '#FF6F61',
@@ -18,8 +20,129 @@ type SkillFilterTag = {
     skill: Skill;
     selected: boolean;
     isFilter: boolean;
-    setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>;
+    setDisplayedProjects?: React.Dispatch<React.SetStateAction<typeof projects>>;
 }
+
+type ProjectInfoProps = {
+    name: string;
+    description: string;
+    skillsUsed: Skill[];
+    githubLink?: string;
+}
+
+const FilterProjects = (setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>) => {
+    // Update displayed projects
+    var projectsToDisplay: React.ReactElement<typeof ProjectInfo>[]  = []
+    var selectedSkills: string[] = []
+    
+    // 
+    Object.entries(filteredSkills).forEach(([key, value]: [string, { skill: Skill, selected: boolean}]) => {
+        if (value.selected)
+            selectedSkills.push(value.skill.name)
+    });
+    
+    projects.forEach((curProject: React.ReactElement<typeof ProjectInfo>) => {
+         // Access props of the component
+        const props = curProject.props as typeof ProjectInfo;
+        console.log(props)
+        var tempSkills = structuredClone(selectedSkills)
+
+        console.log('Search filter: ' + searchFilter + ' Project name: ' + props.name.toLowerCase())
+
+        // Skip project if the name doesnt match the search filter
+        if (searchFilter !== '' && props.name.toLowerCase().startsWith(searchFilter) == false)
+            return;
+        
+        // Remove any skills that are met
+        props.skillsUsed.forEach((skill: Skill) => {
+            var skillIndex = tempSkills.indexOf(skill.name);
+            if (skillIndex !== -1) {
+                tempSkills.splice(skillIndex, 1);
+            }
+        })
+        
+        // Display project if it has all the skills selected
+        if (tempSkills.length == 0) {
+            projectsToDisplay.push(curProject)
+        }
+    })
+    
+    if (setDisplayedProjects)
+        setDisplayedProjects(projectsToDisplay)
+}
+
+const SearchAndFilterBar: React.FC<{setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>}> = ({ setDisplayedProjects }) => {
+    const searchBarRef = useRef<HTMLDivElement>(null);
+
+    const Search = (e: React.ChangeEvent<HTMLInputElement>) => {
+        if (searchBarRef.current) {
+            searchFilter = e.target.value.toLowerCase();
+            FilterProjects(setDisplayedProjects)
+        }
+    }
+
+    return (
+        <div className="text-center w-full p-4 space-y-3">
+            <div className="space-x-5">
+                <label className="text-2xl">Filter by name:</label>
+                <div ref={searchBarRef}>
+                    <input  onChange={Search} id="search_filter" type="text" className="p-2 border rounded-4xl" />
+                </div>
+            </div>
+            <div className="space-x-2">
+                {filteredSkills.map((skillTag, index) => (
+                    <SkillTag key={index} skill={skillTag.skill} selected={skillTag.selected} isFilter={true} setDisplayedProjects={setDisplayedProjects}/>
+                ))}
+            </div>
+        </div>
+    )
+}
+
+const ProjectInfo: React.FC<ProjectInfoProps> = ({ name, description, skillsUsed, githubLink}) => {
+    return (
+        <div id={name.replaceAll(' ', '_')} className="p-4 rounded-lg bg-[var(--color-bg-accent)] space-y-2">
+            <h3 className="text-2xl font-bold">
+                {name}
+            </h3>
+            <div>
+                {description}
+            </div>
+            <div className="space-x-2 space-y-2">
+                {skillsUsed.map((skill, index) => (
+                    <SkillTag key={index} skill={skill} selected={true} isFilter={false}/>
+                ))}
+            </div>
+            {githubLink && <Link href={githubLink} target="_blank" className="text-blue-600 hover:text-blue-800">GitHub</Link>}
+        </div>
+    );
+}
+
+const SkillTag: React.FC<SkillFilterTag> = ({skill, selected, isFilter, setDisplayedProjects}) => {
+    const [isSelected, setSelected] = useState(selected);
+
+    const toggleSelect = () => {
+        if (isFilter) {
+            console.log(`Filter by ${skill.name}`);
+            setSelected(!isSelected);
+
+            var toggledSkillIndex = filteredSkills.findIndex((skillTag) => {
+                return skillTag.skill.name == skill.name
+            })
+
+            if (toggledSkillIndex !== -1)
+                filteredSkills[toggledSkillIndex].selected = !isSelected
+
+            if (setDisplayedProjects)
+                FilterProjects(setDisplayedProjects)
+        }
+    }
+
+    return (
+        <div onClick={toggleSelect} style={{ backgroundColor: isSelected ? skill.category : 'var(--color-bg-alt-accent)' }} className={`${isFilter ? 'hover:animate-grow animate-shrink hover:cursor-default' : ''} inline-block px-2 py-1 rounded-full text-sm w-fit`}>
+            {skill.name}
+        </div>
+    )
+} 
 
 const skillsDictionary: Record<string, Skill> = {
     'C#': { name: 'C#', category: SkillCatgegory.Language },
@@ -45,48 +168,6 @@ const filteredSkills = Object.values(skillsDictionary).map((skill) => {
     }
 }).sort((a, b) => b.skill.category.toString().localeCompare(a.skill.category.toString()));
 
-type ProjectInfoProps = {
-    name: string;
-    description: string;
-    skillsUsed: Skill[];
-    githubLink?: string;
-}
-
-const SearchAndFilterBar: React.FC<{setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>}> = ({ setDisplayedProjects }) => {
-    return (
-        <div className="text-center w-full p-4 space-y-3">
-            <div className="space-x-5">
-                <label className="text-2xl">Filter by name:</label>
-                <input type="text" className="p-2 border rounded-4xl" />
-            </div>
-            <div className="space-x-2">
-                {filteredSkills.map((skillTag, index) => (
-                    <SkillTag key={index} skill={skillTag.skill} selected={skillTag.selected} isFilter={true} setDisplayedProjects={setDisplayedProjects}/>
-                ))}
-            </div>
-        </div>
-    )
-}
-
-const ProjectInfo: React.FC<ProjectInfoProps> = ({ name, description, skillsUsed, githubLink}) => {
-    return (
-        <div id={name.replaceAll(' ', '_')} className="p-4 rounded-lg bg-[var(--color-bg-accent)] space-y-2">
-            <h3 className="text-2xl font-bold">
-                {name}
-            </h3>
-            <div>
-                {description}
-            </div>
-            <div className="space-x-2 space-y-2">
-                {skillsUsed.map((skill, index) => (
-                    <SkillTag key={index} skill={skill} selected={true} isFilter={false}/>
-                ))}
-            </div>
-            {githubLink && <Link href={githubLink} className="text-blue-600 hover:text-blue-800">GitHub</Link>}
-        </div>
-    );
-}
-
 const projects: React.ReactElement<typeof ProjectInfo>[] = [
     <ProjectInfo 
         name='Spool Meter Management System' 
@@ -105,65 +186,39 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
             skillsDictionary['.NET MAUI'],
             skillsDictionary['SQL']
         ]}
+    />,
+    <ProjectInfo 
+        name='Cronocord'
+        description=
+            {`Cronocord is a Discord bot that helps manage schedules between multiple people.
+            Users will add their availabilities and can then generate a schedule that contains all the availabilities of everyone the user has selected.
+            This is a group project that was created for UofA's HackEd 2025 hackathon, the first hackathon I ever attended.
+            This project taught me how to use Discord's API and a serverless database, and it strengthened my skills in teamwork, time management, and project management.`}
+        skillsUsed={[
+            skillsDictionary['Python'],
+            skillsDictionary['SQL']
+        ]}
+        githubLink="https://github.com/JohnNasitem/Hacked2025-HomelessInc"
+    />,
+    <ProjectInfo 
+        name='Website Portfolio'
+        description=
+            {`This is the website you are looking at right now.
+            The computer engineering technology program I attended at NAIT taught me how to use HTML, CSS, Javascript, and jQuery, but I wanted to learn more modern web development technologies.
+            Before this project, I had never used any other web development technologies and had little experience with UI/UX. 
+            The goal of this project was the build experience with new techonlogies, so I had decided to learn Next.js, React, Tailwind, and Typescript.`}
+        skillsUsed={[
+            skillsDictionary['TypeScript'],
+            skillsDictionary['HTML'],
+            skillsDictionary['CSS'],
+            skillsDictionary['JavaScript'],
+            skillsDictionary['Tailwind'],
+            skillsDictionary['Next.js'],
+            skillsDictionary['React']
+        ]}
+        githubLink="https://github.com/JohnNasitem/Hacked2025-HomelessInc"
     />
 ]
-
-const SkillTag: React.FC<SkillFilterTag> = ({skill, selected, isFilter, setDisplayedProjects}) => {
-    const [isSelected, setSelected] = useState(selected);
-
-    const toggleSelect = () => {
-        if (isFilter) {
-            console.log(`Filter by ${skill.name}`);
-            setSelected(!isSelected);
-
-            var toggledSkillIndex = filteredSkills.findIndex((skillTag) => {
-                return skillTag.skill.name == skill.name
-            })
-
-            if (toggledSkillIndex !== -1)
-                filteredSkills[toggledSkillIndex].selected = !isSelected
-
-            // Update displayed projects
-            var projectsToDisplay: React.ReactElement<typeof ProjectInfo>[]  = []
-            var selectedSkills: string[] = []
-            
-            // 
-            Object.entries(filteredSkills).forEach(([key, value]: [string, { skill: Skill, selected: boolean}]) => {
-                if (value.selected)
-                    selectedSkills.push(value.skill.name)
-            });
-            
-            projects.forEach((curProject: React.ReactElement<typeof ProjectInfo>) => {
-                 // Access props of the component
-                const props = curProject.props as typeof ProjectInfo;
-                console.log(props)
-                var tempSkills = structuredClone(selectedSkills)
-                
-                // Remove any skills that are met
-                props.skillsUsed.forEach((skill: Skill) => {
-                    var skillIndex = tempSkills.indexOf(skill.name);
-                    if (skillIndex !== -1) {
-                        tempSkills.splice(skillIndex, 1);
-                    }
-                })
-                
-                // Display project if it has all the skills selected
-                if (tempSkills.length == 0) {
-                    projectsToDisplay.push(curProject)
-                }
-            })
-
-            setDisplayedProjects(projectsToDisplay)
-        }
-    }
-
-    return (
-        <div onClick={toggleSelect} style={{ backgroundColor: isSelected ? skill.category : 'var(--color-bg-alt-accent)' }} className={`${isFilter ? 'hover:animate-grow animate-shrink hover:cursor-default' : ''} inline-block px-2 py-1 rounded-full text-sm w-fit`}>
-            {skill.name}
-        </div>
-    )
-}   
-
 
 export default function Home() {
     const [displayedProjects, setProjects] = useState(projects);
@@ -172,11 +227,16 @@ export default function Home() {
        <div className="p-4">
             <div className="w-full text-center text-4xl font-bold">Projects</div>
             <SearchAndFilterBar setDisplayedProjects={setProjects}/>
-            {displayedProjects.map((project, index) => (
-                <div key={index}>
-                    {project}
-                </div>
-            ))}
+            <div className="grid gap-y-5">
+                {projects.map((project, index) => (
+                    <div 
+                        key={index} 
+                        className={`
+                            ${displayedProjects.includes(project) ? '' : 'hidden'}`}>
+                        {project}
+                    </div>
+                ))}
+            </div>
        </div>
      );
 }
