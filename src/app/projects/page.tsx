@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useRef, useEffect, useState } from "react";
 import { useSearchParams } from 'next/navigation'
 
-var searchFilter = '';
+let searchFilter = '';
 
 enum SkillCatgegory {
     Language = '#FF6F61',
@@ -33,8 +33,8 @@ type ProjectInfoProps = {
 
 const FilterProjects = (setDisplayedProjects: React.Dispatch<React.SetStateAction<typeof projects>>) => {
     // Update displayed projects
-    var projectsToDisplay: React.ReactElement<typeof ProjectInfo>[]  = []
-    var selectedSkills: string[] = []
+    let projectsToDisplay: React.ReactElement<typeof ProjectInfo>[]  = []
+    let selectedSkills: string[] = []
     
     // 
     Object.entries(filteredSkills).forEach(([key, value]: [string, { skill: Skill, selected: boolean}]) => {
@@ -46,7 +46,7 @@ const FilterProjects = (setDisplayedProjects: React.Dispatch<React.SetStateActio
          // Access props of the component
         const props = curProject.props as typeof ProjectInfo;
         console.log(props)
-        var tempSkills = structuredClone(selectedSkills)
+        let tempSkills = structuredClone(selectedSkills)
 
         console.log('Search filter: ' + searchFilter + ' Project name: ' + props.name.toLowerCase())
 
@@ -56,7 +56,7 @@ const FilterProjects = (setDisplayedProjects: React.Dispatch<React.SetStateActio
         
         // Remove any skills that are met
         props.skillsUsed.forEach((skill: Skill) => {
-            var skillIndex = tempSkills.indexOf(skill.name);
+            let skillIndex = tempSkills.indexOf(skill.name);
             if (skillIndex !== -1) {
                 tempSkills.splice(skillIndex, 1);
             }
@@ -124,7 +124,7 @@ const SkillTag: React.FC<SkillFilterTag> = ({skill, selected, isFilter, setDispl
             console.log(`Filter by ${skill.name}`);
             setSelected(!isSelected);
 
-            var toggledSkillIndex = filteredSkills.findIndex((skillTag) => {
+            let toggledSkillIndex = filteredSkills.findIndex((skillTag) => {
                 return skillTag.skill.name == skill.name
             })
 
@@ -233,7 +233,7 @@ export default function Home() {
 
         FilterProjects(setProjects)
         if (searchBarRef.current) {
-            var input = searchBarRef.current?.querySelector('input');
+            let input = searchBarRef.current?.querySelector('input');
             if (input) {
                 input.value = searchFilter;
             }

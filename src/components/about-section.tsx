@@ -14,7 +14,7 @@ const AboutSection = () => {
                 </h2>
                 <div className={`bg-blue-300 h-1 w-20 mt-5 mb-5 ${section1Visible ? 'animate-fade-slide-in' : ''}`}/>
                 <p id="about_section2" className={`text-2x1 text-left ${section2Visible ? 'animate-fade-slide-in' : ''}`}>
-                    Hi, I'm John, a computer engineering techonlogist. I have a passion for technology and a strong desire to learn and grow in the field.
+                    Hi, I\'m John, a computer engineering techonlogist. I have a passion for technology and a strong desire to learn and grow in the field.
                     I am interestd in software and game development, and i enjoy working on projects that challenge me to think critically and creatively.
                 </p>
             </div>

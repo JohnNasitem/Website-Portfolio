@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import ThemeToggle from "@/components/theme-toggle";
 
 type NarbarProps = {
@@ -21,9 +22,9 @@ const Navbar: React.FC<NarbarProps> = ({ links, logo}) => {
             <div className="container mx-auto flex justify-between items-center">
                 {/* Only add logo if one is supplied */}
                 {logo && (
-                    <a href ="/" className="flex items-center">
-                        <img src={logo} alt="Logo" className="h-8" />
-                    </a>
+                    <Link href ="/" className="flex items-center">
+                        <Image width={100} height={100} src={logo} alt="Logo" className="h-8" />
+                    </Link>
                 )}
 
                 {/* Desktop Links */}
