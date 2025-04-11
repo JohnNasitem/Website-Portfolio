@@ -117,10 +117,9 @@ body {
 }
 
 /* Smoothly transition between themes */
-body * {
-  @apply transition-colors duration-400;
+body div {
+  @apply transition-[background-color] duration-400;
 }
-
 html {
   scroll-behavior: smooth;
   background-color: black;
