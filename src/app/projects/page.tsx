@@ -198,7 +198,7 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
             skillsDictionary['C#'],
             skillsDictionary['SQL']
         ]}
-        githubLink="https://github.com/JohnNasitem/Hacked2025-HomelessInc"
+        githubLink="https://github.com/JohnNasitem/CronoCord/"
     />,
     <ProjectInfo 
         key={2}
