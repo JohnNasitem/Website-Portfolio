@@ -14,7 +14,7 @@ const SVGRenderer = ({icon}: {icon: string}) => {
 }
 
 const ThemeToggle = () => {
-    const [theme, setTheme] = useState<'light' | 'dark'>('light');
+    const [theme, setTheme] = useState<'light' | 'dark'>('dark');
 
     useEffect(() => {
         const storedTheme = localStorage.getItem('theme') as 'light' | 'dark' | null;
