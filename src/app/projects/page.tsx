@@ -191,9 +191,11 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
             {`Cronocord is a Discord bot that helps manage schedules between multiple people.
             Users will add their availabilities and can then generate a schedule that contains all the availabilities of everyone the user has selected.
             This is a group project that was created for UofA's HackEd 2025 hackathon, the first hackathon I ever attended.
-            This project taught me how to use Discord's API and a serverless database, and it strengthened my skills in teamwork, time management, and project management.`}
+            This project taught me how to use Discord's API and a serverless database, and it strengthened my skills in teamwork, time management, and project management.
+            After the hackathon, I remade the bot by myself in C# using discord.net.`}
         skillsUsed={[
             skillsDictionary['Python'],
+            skillsDictionary['C#'],
             skillsDictionary['SQL']
         ]}
         githubLink="https://github.com/JohnNasitem/Hacked2025-HomelessInc"
