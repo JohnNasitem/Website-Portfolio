@@ -183,6 +183,7 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
             skillsDictionary['.NET MAUI'],
             skillsDictionary['SQL']
         ]}
+        githubLink="https://github.com/JohnNasitem/Spool-Meter-Mangement-System/"
     />,
     <ProjectInfo 
         key={1}
