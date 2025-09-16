@@ -29,7 +29,7 @@ const ProjectsSection = () => {
                         <InfoCard title="Website Portfolio" description="The site you are looking at right now." image="/site_page.png"/>
                     </div>
                     <div id='projects_section5' className={`${section5Visible ? 'animate-fade-slide-in' : ''}`}>
-                        <InfoCard title="Payor Ledger" description="Desktop ledger application" image="/LedgerIcon.png"/>
+                        <InfoCard title="Payor Ledger" description="Desktop ledger application" image="/LedgerIcon.jpg"/>
                     </div>
                 </div>
             </div>
