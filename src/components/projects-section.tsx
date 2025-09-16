@@ -8,6 +8,7 @@ const ProjectsSection = () => {
     const section2Visible = useAnimateEntrance("projects_section2");
     const section3Visible = useAnimateEntrance("projects_section3");
     const section4Visible = useAnimateEntrance("projects_section4");
+    const section5Visible = useAnimateEntrance("projects_section5");
     
     return (
         <div id='projects' className="pageSection font-[family-name:var(--font-geist-mono)]">
@@ -26,6 +27,9 @@ const ProjectsSection = () => {
                     </div>
                     <div id='projects_section4' className={`${section4Visible ? 'animate-fade-slide-in' : ''}`}>
                         <InfoCard title="Website Portfolio" description="The site you are looking at right now." image="/site_page.png"/>
+                    </div>
+                    <div id='projects_section5' className={`${section5Visible ? 'animate-fade-slide-in' : ''}`}>
+                        <InfoCard title="Payor Ledger" description="Desktop ledger application" image="/LedgerIcon.png"/>
                     </div>
                 </div>
             </div>

@@ -142,13 +142,14 @@ const SkillTag: React.FC<SkillFilterTag> = ({skill, selected, isFilter, setDispl
 
 const skillsDictionary: Record<string, Skill> = {
     'C#': { name: 'C#', category: SkillCatgegory.Language },
-    'SQL': { name: 'SQL', category: SkillCatgegory.Library },
+    'SQL': { name: 'SQL', category: SkillCatgegory.Language },
     'PHP': { name: 'PHP', category: SkillCatgegory.Language },
     'Python': { name: 'Python', category: SkillCatgegory.Language },
     'HTML': { name: 'HTML', category: SkillCatgegory.Language },
     'CSS': { name: 'CSS', category: SkillCatgegory.Language },
     'JavaScript': { name: 'JavaScript', category: SkillCatgegory.Language },
     'TypeScript': { name: 'TypeScript', category: SkillCatgegory.Language },
+    'WPF': { name: 'WPF', category: SkillCatgegory.Framework },
     'ASP.NET CORE': { name: 'ASP.NET CORE', category: SkillCatgegory.Framework },
     '.NET MAUI': { name: '.NET MAUI', category: SkillCatgegory.Framework },
     'Tailwind': { name: 'Tailwind', category: SkillCatgegory.Framework },
@@ -179,9 +180,9 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
             Entity framework was used to interact with the database from the server and I used REST to communicate between the server and the client.`}
         skillsUsed={[
             skillsDictionary['C#'],
+            skillsDictionary['SQL'],
             skillsDictionary['ASP.NET CORE'],
             skillsDictionary['.NET MAUI'],
-            skillsDictionary['SQL']
         ]}
         githubLink="https://github.com/JohnNasitem/Spool-Meter-Mangement-System/"
     />,
@@ -219,6 +220,20 @@ const projects: React.ReactElement<typeof ProjectInfo>[] = [
             skillsDictionary['React']
         ]}
         githubLink="https://github.com/JohnNasitem/Website-Portfolio"
+    />,
+    <ProjectInfo 
+        key={1}
+        name='Payor Ledger'
+        description=
+            {`A desktop ledger application built with WPF that enables users to log and manage debts. \
+            Each payor is represented as a row, each loan as a column, and the grid tracks how much each payor owes for each loan. 
+            The application supports easy data entry and provides a clear overview of totals per payor and per loan.`}
+        skillsUsed={[
+            skillsDictionary['C#'],
+            skillsDictionary['SQL'],
+            skillsDictionary['WPF'],
+        ]}
+        githubLink="https://github.com/JohnNasitem/PayorLedger"
     />
 ]
 
